@@ -4,7 +4,17 @@ view: feedback {
   dimension_group: timestamp {
     type: time
     timeframes: [time, date, week, month, raw]
-    sql: ${TABLE}.Timestamp ;;
+    sql: STR_TO_DATE(${TABLE}.`Timestamp`,'%m/%d/%Y %T') ;;
+  }
+
+  dimension: date_dim {
+    type:  date_time
+    sql: ${TABLE}.`Timestamp` ;;
+  }
+
+  dimension: date_string {
+    type:  string
+    sql: ${TABLE}.`Timestamp` ;;
   }
 
   dimension: 1_mon_evolve_org_helpful {
